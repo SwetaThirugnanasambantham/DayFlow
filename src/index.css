@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --app-bg: #020617;
+    --app-card: #0f172a;
+    --app-card-muted: #1e293b;
+    --app-border: #1e293b;
+    --app-border-hover: #334155;
+    --app-text: #f8fafc;
+    --app-text-muted: #94a3b8;
+    --app-accent: #6366f1;
+    --app-accent-hover: #4f46e5;
+    --app-accent-subtle: rgba(99, 102, 241, 0.15);
+  }
+
+  /* --- LIGHT MODE DEFAULT --- */
+  html.light {
+    color-scheme: light;
+    --app-bg: #f8fafc;
+    --app-card: #ffffff;
+    --app-card-muted: #f1f5f9;
+    --app-border: #e2e8f0;
+    --app-border-hover: #cbd5e1;
+    --app-text: #0f172a;
+    --app-text-muted: #64748b;
+    --app-accent: #4f46e5;
+    --app-accent-hover: #4338ca;
+    --app-accent-subtle: rgba(79, 70, 229, 0.1);
+  }
+
+  /* --- NUDE THEME (Warm Linen, Sand, Terracotta, Oat Milk, Espresso) --- */
+  [data-aesthetic="nude"] {
+    --app-bg: #191614;
+    --app-card: #25201d;
+    --app-card-muted: #332d29;
+    --app-border: #3d352f;
+    --app-border-hover: #544941;
+    --app-text: #f7f3ef;
+    --app-text-muted: #b8a89d;
+    --app-accent: #d47d64;
+    --app-accent-hover: #c46b52;
+    --app-accent-subtle: rgba(212, 125, 100, 0.18);
+  }
+  html.light[data-aesthetic="nude"],
+  html.light [data-aesthetic="nude"] {
+    --app-bg: #faf7f2;
+    --app-card: #ffffff;
+    --app-card-muted: #f3ede4;
+    --app-border: #e6ded4;
+    --app-border-hover: #d8cdbf;
+    --app-text: #2c2520;
+    --app-text-muted: #807064;
+    --app-accent: #c86d51;
+    --app-accent-hover: #b45c41;
+    --app-accent-subtle: rgba(200, 109, 81, 0.12);
+  }
+
+  /* --- MONOTONIC NOIR (Stark Minimalist Ink, Steel & Charcoal) --- */
+  [data-aesthetic="monotonic"] {
+    --app-bg: #050505;
+    --app-card: #111111;
+    --app-card-muted: #1c1c1c;
+    --app-border: #262626;
+    --app-border-hover: #404040;
+    --app-text: #ffffff;
+    --app-text-muted: #8e8e8e;
+    --app-accent: #f5f5f5;
+    --app-accent-hover: #e5e5e5;
+    --app-accent-subtle: rgba(255, 255, 255, 0.12);
+  }
+  html.light[data-aesthetic="monotonic"],
+  html.light [data-aesthetic="monotonic"] {
+    --app-bg: #f9f9f9;
+    --app-card: #ffffff;
+    --app-card-muted: #f0f0f0;
+    --app-border: #d4d4d4;
+    --app-border-hover: #a3a3a3;
+    --app-text: #050505;
+    --app-text-muted: #525252;
+    --app-accent: #171717;
+    --app-accent-hover: #000000;
+    --app-accent-subtle: rgba(0, 0, 0, 0.08);
+  }
+
+  /* --- TROPICAL THEME (Rainforest Emerald, Island Sun, Lagoon Teal) --- */
+  [data-aesthetic="tropical"] {
+    --app-bg: #061510;
+    --app-card: #0c241c;
+    --app-card-muted: #13352a;
+    --app-border: #1a493a;
+    --app-border-hover: #266b55;
+    --app-text: #ecfdf5;
+    --app-text-muted: #82bcaa;
+    --app-accent: #10b981;
+    --app-accent-hover: #059669;
+    --app-accent-subtle: rgba(16, 185, 129, 0.18);
+  }
+  html.light[data-aesthetic="tropical"],
+  html.light [data-aesthetic="tropical"] {
+    --app-bg: #f2f8f5;
+    --app-card: #ffffff;
+    --app-card-muted: #e4f2eb;
+    --app-border: #cfe6dc;
+    --app-border-hover: #aed6c5;
+    --app-text: #08291f;
+    --app-text-muted: #447768;
+    --app-accent: #059669;
+    --app-accent-hover: #047857;
+    --app-accent-subtle: rgba(5, 150, 105, 0.12);
+  }
+
+  /* --- CITY LANDSCAPE (Metropolitan Midnight Dusk, Violet Skyline & Amber Streetlights) --- */
+  [data-aesthetic="city_landscape"] {
+    --app-bg: #080c18;
+    --app-card: #10172a;
+    --app-card-muted: #18223d;
+    --app-border: #202d4f;
+    --app-border-hover: #2e4170;
+    --app-text: #f1f5f9;
+    --app-text-muted: #8d9dc2;
+    --app-accent: #8b5cf6;
+    --app-accent-hover: #7c3aed;
+    --app-accent-subtle: rgba(139, 92, 246, 0.2);
+  }
+  html.light[data-aesthetic="city_landscape"],
+  html.light [data-aesthetic="city_landscape"] {
+    --app-bg: #f3f5fa;
+    --app-card: #ffffff;
+    --app-card-muted: #e7ecf7;
+    --app-border: #d4dcf0;
+    --app-border-hover: #b8c6e6;
+    --app-text: #0b1329;
+    --app-text-muted: #536287;
+    --app-accent: #7c3aed;
+    --app-accent-hover: #6d28d9;
+    --app-accent-subtle: rgba(124, 58, 237, 0.12);
+  }
+
+  /* --- PASTEL THEME (Marshmallow Lilac, Sweet Blush, Matcha Milk, Cloud Blue) --- */
+  [data-aesthetic="pastel"] {
+    --app-bg: #141021;
+    --app-card: #1e1832;
+    --app-card-muted: #2a2245;
+    --app-border: #382c5b;
+    --app-border-hover: #4e3e7c;
+    --app-text: #f9f7fe;
+    --app-text-muted: #b7a9d6;
+    --app-accent: #c084fc;
+    --app-accent-hover: #a855f7;
+    --app-accent-subtle: rgba(192, 132, 252, 0.2);
+  }
+  html.light[data-aesthetic="pastel"],
+  html.light [data-aesthetic="pastel"] {
+    --app-bg: #faf7fd;
+    --app-card: #ffffff;
+    --app-card-muted: #f2ebf9;
+    --app-border: #e6daf3;
+    --app-border-hover: #d4c0ea;
+    --app-text: #2a1c3c;
+    --app-text-muted: #796594;
+    --app-accent: #a855f7;
+    --app-accent-hover: #9333ea;
+    --app-accent-subtle: rgba(168, 85, 247, 0.12);
+  }
+
+  /* --- NORDIC FROST (Arctic Fjord, Polar Pine, Sea Stone) --- */
+  [data-aesthetic="nordic"] {
+    --app-bg: #081017;
+    --app-card: #101d29;
+    --app-card-muted: #172a3b;
+    --app-border: #1e364c;
+    --app-border-hover: #2b4e6d;
+    --app-text: #f0f6fa;
+    --app-text-muted: #8aa4b8;
+    --app-accent: #38bdf8;
+    --app-accent-hover: #0284c7;
+    --app-accent-subtle: rgba(56, 189, 248, 0.18);
+  }
+  html.light[data-aesthetic="nordic"],
+  html.light [data-aesthetic="nordic"] {
+    --app-bg: #f4f7f9;
+    --app-card: #ffffff;
+    --app-card-muted: #e6edf2;
+    --app-border: #d2dee6;
+    --app-border-hover: #b4c7d4;
+    --app-text: #0e1e2b;
+    --app-text-muted: #4e6577;
+    --app-accent: #0284c7;
+    --app-accent-hover: #0369a1;
+    --app-accent-subtle: rgba(2, 132, 199, 0.12);
+  }
+
+  /* --- TYPOGRAPHY STYLES --- */
+  [data-typography="sans"] {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  }
+  [data-typography="serif"] {
+    font-family: "Georgia", "Cambria", "Playfair Display", "Times New Roman", serif;
+  }
+  [data-typography="mono"] {
+    font-family: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+  }
+  [data-typography="rounded"] {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Apply CSS custom variables to application elements */
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--app-bg);
+    color: var(--app-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Dynamic re-coloring of common Tailwind surface containers */
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-950,
+  [data-aesthetic]:not([data-aesthetic="default"]) aside,
+  [data-aesthetic]:not([data-aesthetic="default"]) header {
+    background-color: var(--app-bg) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-900 {
+    background-color: var(--app-card) !important;
+    border-color: var(--app-border) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-800,
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-800\/80,
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-800\/60,
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-800\/50,
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-slate-800\/40 {
+    background-color: var(--app-card-muted) !important;
+    border-color: var(--app-border) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .border-slate-800,
+  [data-aesthetic]:not([data-aesthetic="default"]) .border-slate-700 {
+    border-color: var(--app-border) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-slate-100,
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-slate-200,
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-white {
+    color: var(--app-text) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-slate-400,
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-slate-500 {
+    color: var(--app-text-muted) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .bg-indigo-600 {
+    background-color: var(--app-accent) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-indigo-400,
+  [data-aesthetic]:not([data-aesthetic="default"]) .text-indigo-300 {
+    color: var(--app-accent) !important;
+  }
+
+  [data-aesthetic]:not([data-aesthetic="default"]) .border-indigo-500 {
+    border-color: var(--app-accent) !important;
+  }
+
+  /* --- BACKGROUND PATTERNS --- */
+  [data-pattern="subtle-grid"] {
+    background-image: linear-gradient(to right, rgba(128, 128, 128, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(128, 128, 128, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  [data-pattern="dots"] {
+    background-image: radial-gradient(rgba(128, 128, 128, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+  }
+
+  [data-pattern="glow"] {
+    background-image: radial-gradient(circle at 50% 0%, var(--app-accent-subtle) 0%, transparent 60%);
+  }
+
+  [data-pattern="mesh"] {
+    background-image: radial-gradient(at 0% 0%, var(--app-accent-subtle) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.1) 0px, transparent 50%);
+  }
+}
+
+/* Custom scrollbars matching theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--app-border, #334155);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--app-border-hover, #475569);
+}
