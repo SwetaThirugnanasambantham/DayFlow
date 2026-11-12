@@ -1,0 +1,247 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "timezone": { "type": "string", "maxLength": 64 },
+        "onboardingCompleted": { "type": "boolean" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Productivity task with scheduling, priority, and metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "description": { "type": "string", "maxLength": 4000 },
+        "status": {
+          "type": "string",
+          "enum": ["backlog", "todo", "in_progress", "completed", "cancelled", "archived"]
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "urgent"]
+        },
+        "category": { "type": "string", "maxLength": 64 },
+        "tags": { "type": "array" },
+        "startDate": { "type": "string", "maxLength": 32 },
+        "dueDate": { "type": "string", "maxLength": 32 },
+        "startTime": { "type": "string", "maxLength": 16 },
+        "endTime": { "type": "string", "maxLength": 16 },
+        "estimatedDuration": { "type": "number" },
+        "actualDuration": { "type": "number" },
+        "completedAt": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "title", "status", "priority"]
+    },
+    "Subtask": {
+      "title": "Subtask",
+      "description": "Hierarchical nested subtask of a parent task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "taskId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "parentSubtaskId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "completed": { "type": "boolean" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "taskId", "userId", "title", "completed"]
+    },
+    "TaskNote": {
+      "title": "TaskNote",
+      "description": "Rich note associated with a specific task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "taskId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "content": { "type": "string", "maxLength": 10000 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "taskId", "userId", "content"]
+    },
+    "Routine": {
+      "title": "Routine",
+      "description": "Daily or weekly recurring routine definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "scheduledTime": { "type": "string", "maxLength": 16 },
+        "durationMinutes": { "type": "number" },
+        "frequency": { "type": "string", "enum": ["daily", "weekdays", "weekends", "weekly", "custom"] },
+        "daysOfWeek": { "type": "array" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "title", "frequency", "active"]
+    },
+    "RoutineOccurrence": {
+      "title": "RoutineOccurrence",
+      "description": "Daily execution instance of a routine",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "routineId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 32 },
+        "completed": { "type": "boolean" },
+        "completedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "routineId", "userId", "date", "completed"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "Habit to track consistency and streaks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "frequency": { "type": "string", "enum": ["daily", "weekly", "custom"] },
+        "targetDaysPerWeek": { "type": "number" },
+        "targetValue": { "type": "number" },
+        "unit": { "type": "string", "maxLength": 32 },
+        "color": { "type": "string", "maxLength": 32 },
+        "currentStreak": { "type": "number" },
+        "longestStreak": { "type": "number" },
+        "archived": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "title", "frequency"]
+    },
+    "HabitLog": {
+      "title": "HabitLog",
+      "description": "Record of habit completion on a specific date",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "habitId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 32 },
+        "value": { "type": "number" },
+        "completed": { "type": "boolean" },
+        "completedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "habitId", "userId", "date", "completed"]
+    },
+    "FocusSession": {
+      "title": "FocusSession",
+      "description": "Completed Pomodoro focus or break session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "taskId": { "type": "string", "maxLength": 128 },
+        "taskTitle": { "type": "string", "maxLength": 256 },
+        "sessionType": { "type": "string", "enum": ["focus", "short_break", "long_break"] },
+        "durationMinutes": { "type": "number" },
+        "completed": { "type": "boolean" },
+        "date": { "type": "string", "maxLength": 32 },
+        "startedAt": { "type": "string", "maxLength": 64 },
+        "completedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "sessionType", "durationMinutes", "completed"]
+    },
+    "UserPreferences": {
+      "title": "UserPreferences",
+      "description": "Workspace settings and UI customization",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+        "aestheticTheme": {
+          "type": "string",
+          "enum": ["default", "nude", "monotonic", "tropical", "city_landscape", "pastel", "nordic"]
+        },
+        "backgroundPattern": {
+          "type": "string",
+          "enum": ["none", "subtle-grid", "dots", "glow", "mesh"]
+        },
+        "typographyStyle": {
+          "type": "string",
+          "enum": ["sans", "serif", "mono", "rounded"]
+        },
+        "accentColor": { "type": "string", "maxLength": 32 },
+        "fontFamily": { "type": "string", "maxLength": 64 },
+        "density": { "type": "string", "enum": ["compact", "comfortable", "spacious"] },
+        "pomodoroFocusMinutes": { "type": "number" },
+        "pomodoroShortBreakMinutes": { "type": "number" },
+        "pomodoroLongBreakMinutes": { "type": "number" },
+        "pomodoroLongBreakInterval": { "type": "number" },
+        "pomodoroAutoStartBreaks": { "type": "boolean" },
+        "pomodoroAutoStartPomodoros": { "type": "boolean" },
+        "audioVolume": { "type": "number" },
+        "reviewReminderTime": { "type": "string", "maxLength": 16 },
+        "quietHoursStart": { "type": "string", "maxLength": 16 },
+        "quietHoursEnd": { "type": "string", "maxLength": 16 },
+        "enableSoundEffects": { "type": "boolean" },
+        "enableBrowserNotifications": { "type": "boolean" },
+        "weekStartDay": { "type": "number" },
+        "visibleDashboardWidgets": { "type": "array" }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User account document"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User tasks"
+    },
+    "/users/{userId}/tasks/{taskId}/subtasks/{subtaskId}": {
+      "schema": "Subtask",
+      "description": "Task subtasks"
+    },
+    "/users/{userId}/tasks/{taskId}/notes/{noteId}": {
+      "schema": "TaskNote",
+      "description": "Task notes"
+    },
+    "/users/{userId}/routines/{routineId}": {
+      "schema": "Routine",
+      "description": "Daily routines"
+    },
+    "/users/{userId}/routineOccurrences/{occurrenceId}": {
+      "schema": "RoutineOccurrence",
+      "description": "Daily routine occurrences"
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "User habits"
+    },
+    "/users/{userId}/habitLogs/{logId}": {
+      "schema": "HabitLog",
+      "description": "Logs of habit completion"
+    },
+    "/users/{userId}/focusSessions/{sessionId}": {
+      "schema": "FocusSession",
+      "description": "Pomodoro focus sessions"
+    },
+    "/users/{userId}/settings/preferences": {
+      "schema": "UserPreferences",
+      "description": "User preferences and workspace settings"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Dayflow - Personal Productivity & Life Management",
+  "description": "Comprehensive personal productivity ecosystem combining task management, calendar scheduling, habit tracking, daily routines, Pomodoro focus, ambient audio, and productivity analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
